@@ -1,0 +1,5 @@
+requests
+asyncio
+cryptography
+pandas
+numpy
