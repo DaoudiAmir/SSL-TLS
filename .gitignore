@@ -1,0 +1,49 @@
+# Python virtual environments
+**/venv/
+**/.venv/
+**/bin/
+**/lib/
+**/include/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Certificate directories (ignore raw certificates)
+CERT/
+**/CERT/
+certificates/
+**/certificates/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Large certificate archives
+*.zip
+*.tar.gz
+*.rar
+
+# Keep empty output directories
+!CertificateAnalysis/CERT by Size/.gitkeep
+!CertificateAnalysis/DUPES/.gitkeep
+!CertificateAnalysis/GCD/.gitkeep
+!CertificateAnalysis/CSV/.gitkeep
+
+# Keep sample results
+!CertificateAnalysis/CERT by Size/sample_results/
+!CertificateAnalysis/DUPES/sample_results/
+!CertificateAnalysis/GCD/sample_results/
+!CertificateAnalysis/CSV/sample_results/
+
+git_workflow

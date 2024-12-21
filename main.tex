@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\title{SSL/TLS Certificate Analysis Report}
+\author{Daoudi Amir, Heloui Youssef, Baye Diop Cheikh}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In the ever-evolving landscape of cybersecurity, the analysis of SSL/TLS certificates plays a crucial role in ensuring secure communications. Our team, consisting of Daoudi Amir, Heloui Youssef, and Baye Diop Cheikh, has embarked on a journey to develop a comprehensive suite of tools for analyzing SSL/TLS certificates. This report delves into the methodologies employed, the results achieved, and provides a guide for executing our scripts.
+
+\section{Our Approach}
+Our approach is grounded in meticulous analysis and innovative scripting. The project is structured to allow both GUI-based and command-line execution, providing flexibility in how users can interact with the system. We utilized Python's robust libraries, including \texttt{cryptography} and \texttt{pandas}, to process and analyze certificates efficiently.
+
+The scripts are designed to handle large volumes of certificates, sorting them by key size, converting them to CSV for easier manipulation, identifying duplicates, and performing GCD analysis to detect potential vulnerabilities. Our results have been promising, indicating a high level of accuracy and efficiency in processing certificates.
+
+\section{Certificate Downloading}
+To acquire the certificates, we implemented a module called \texttt{AsyncDownload.py}, which utilizes asynchronous downloading from \texttt{crt.sh}. This script employs proxy rotation to avoid rate limiting, ensuring a smooth and efficient download process. The proxies are managed through the \texttt{NewProxyList.py} module, which contains a list of proxy IPs that the downloader rotates through.
+
+The downloading process is automated and can handle a range of certificate IDs, downloading them in parallel for optimal performance. This method allows us to gather a substantial dataset, essential for thorough analysis.
+
+\section{Execution Guide}
+To execute our scripts, ensure you have Python installed along with the necessary libraries listed in \texttt{Requirements.txt}. The execution flow is as follows:
+
+\begin{enumerate}
+    \item Run \texttt{Sort.py} to organize certificates by key size.
+    \item Execute \texttt{certtocsv.py} to convert certificates into CSV format.
+    \item Use \texttt{findDupes.py} to identify duplicate certificates.
+    \item Finally, run \texttt{findGCD.py} to perform GCD analysis on the certificate moduli.
+\end{enumerate}
+
+Our scripts are crafted to be intuitive and user-friendly, with detailed logging to assist in troubleshooting. The results are stored in organized directories, making it easy to review and analyze the output.
+
+\section{Conclusion}
+In conclusion, our SSL/TLS certificate analysis project represents a significant step forward in the realm of cybersecurity. The tools developed by our team are not only effective but also adaptable to various user needs. We are excited about the potential applications of our work and are committed to continuous improvement and innovation.
+
+\end{document}
