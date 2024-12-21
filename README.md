@@ -1,93 +1,171 @@
-# crypto
+# SSL/TLS Certificate Analysis Project
 
+A comprehensive system for analyzing SSL/TLS certificates, focusing on RSA key security analysis. This project can efficiently process millions of certificates from Certificate Transparency logs and other sources.
 
+## Authors
+- Daoudi Amir Salah Eddine
+- Heloui Youssef
+- Baye Diop Cheikh
 
-## Getting started
+## Overview
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+This project implements advanced cryptographic analysis tools to identify potential vulnerabilities in SSL/TLS certificates, with a particular focus on RSA key analysis. It can process certificates from various sources including Certificate Transparency logs and Let's Encrypt.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Key Features
 
-## Add your files
+### Certificate Acquisition
+- Efficient asynchronous downloading from Certificate Transparency logs
+- Advanced proxy rotation system to avoid rate limiting
+- Automated proxy testing and validation
+- Support for bulk certificate processing
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### Certificate Analysis
+- Intelligent sorting by key size and type
+- Duplicate key detection across large datasets
+- Advanced cryptographic analysis using Batch GCD
+- Comprehensive CSV conversion for detailed analysis
+- Non-RSA certificate filtering
+
+## Project Structure
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.esiea.fr/helouiyoussef/crypto.git
-git branch -M main
-git push -uf origin main
+.
+├── CertificateAcquisition/
+│   ├── AsyncDownload.py      # High-performance certificate downloader
+│   ├── NewProxyList.py       # Dynamic proxy management system
+│   ├── TestAllProxyList.py   # Automated proxy validation
+│   ├── getNewProxyList.py    # Proxy list updater
+│   └── Requirements.txt      # Acquisition module dependencies
+│
+├── CertificateAnalysis/
+│   ├── CERT by Size/         # Organized certificate storage
+│   ├── DUPES/               # Duplicate certificates storage
+│   ├── GCD/                 # GCD analysis results
+│   ├── CSV/                 # Certificate data in CSV format
+│   ├── RemoveNotRSA.py       # Certificate type filter
+│   ├── Sort.py              # Multi-threaded certificate sorter
+│   ├── certtocsv.py         # Data conversion utility
+│   ├── findDupes.py         # Duplicate detection system
+│   ├── findGCD.py           # Cryptographic analysis tool
+│   ├── run_analysis_only.sh # Standalone analysis script
+│   └── Requirements.txt     # Analysis module dependencies
+│
+└── projectGUI.sh            # Interactive control interface
 ```
 
-## Integrate with your tools
+## System Requirements
 
-- [ ] [Set up project integrations](https://gitlab.esiea.fr/helouiyoussef/crypto/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Python 3.x (Tested on Python 3.10.2)
+- Linux/Unix-based system or Windows with WSL
+- Minimum 8GB RAM (16GB recommended for large datasets)
+- Sufficient storage space for certificate processing
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+1. Clone the repository:
+   ```bash
+   git clone [repository-url]
+   cd [repository-name]
+   ```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+2. Choose your execution method:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+   ### Option 1: GUI Interface (Recommended)
+   ```bash
+   chmod +x projectGUI.sh
+   ./projectGUI.sh
+   ```
+   The GUI will automatically:
+   - Install required system packages
+   - Configure Python virtual environments
+   - Install Python dependencies
+   - Set up certificate storage
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+   ### Option 2: Manual Installation
+   ```bash
+   # Set up Certificate Acquisition environment
+   cd CertificateAcquisition
+   python -m venv .
+   source bin/activate  # or 'activate' on Windows
+   pip install -r Requirements.txt
+   deactivate
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+   # Set up Certificate Analysis environment
+   cd ../CertificateAnalysis
+   python -m venv .
+   source bin/activate  # or 'activate' on Windows
+   pip install -r Requirements.txt
+   deactivate
+   ```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Usage Guide
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 1. Interactive GUI Mode (Recommended)
+Run `./projectGUI.sh` and follow the menu-driven interface to:
+1. Initialize the environment
+2. Update and validate proxy lists
+3. Download certificates in bulk
+4. Process and analyze certificates
+5. Generate analysis reports
+
+### 2. Analysis-Only Mode
+For pre-downloaded certificates (already present in the folder, or unzipped from the cert by size zip file that we will provide, it contains the certificates downloaded during our project execution process):
+```bash
+cd CertificateAnalysis
+chmod +x run_analysis_only.sh
+./run_analysis_only.sh
+```
+
+### 3. Advanced Usage (Component-wise)
+Execute individual components directly:
+```bash
+# Certificate Acquisition
+cd CertificateAcquisition
+source bin/activate
+python AsyncDownload.py
+deactivate
+
+# Certificate Analysis
+cd ../CertificateAnalysis
+source bin/activate
+python Sort.py
+python RemoveNotRSA.py
+python certtocsv.py
+python findDupes.py
+python findGCD.py
+deactivate
+```
+
+## Implementation Details
+
+### Certificate Acquisition
+- Implements asynchronous downloading using Python's `asyncio`
+- Utilizes intelligent proxy rotation to avoid rate limiting
+- Includes automatic retry mechanisms with exponential backoff
+- Supports resumable downloads and checkpoint saving
+
+### Certificate Analysis
+- Employs efficient batch processing for large certificate sets
+- Implements optimized GCD algorithms for key analysis
+- Uses multi-threading for improved performance
+- Provides detailed progress tracking and logging
+
+### Data Management
+- Organized directory structure for processed certificates
+- Automatic backup of critical analysis results
+- CSV export functionality for external analysis
+- Efficient storage management for large datasets
+
+## Output Structure
+
+Analysis results are organized in the following directories:
+- `CertificateAnalysis/CERT by Size/`: Sorted certificates by key size
+- `CertificateAnalysis/DUPES/`: Identified duplicate certificates
+- `CertificateAnalysis/GCD/`: GCD analysis results
+- `CertificateAnalysis/CSV/`: Generated CSV files for further analysis
+
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project is private, contact adaoudi@et.esiea.fr
+
